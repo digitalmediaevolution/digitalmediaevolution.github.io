@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>peekabooadams</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #ddeef8;
+      --blue: #6ab4e0;
+      --blue-mid: #4e9ecf;
+      --purple: #a88bcc;
+      --purple-light: #c8b0e8;
+      --deep: #2a3a5c;
+      --muted: #6a84a8;
+      --card-bg: rgba(255,255,255,0.38);
+      --card-border: rgba(106,180,224,0.28);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(ellipse at 15% 0%, rgba(168,139,204,0.45) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 20%, rgba(106,180,224,0.55) 0%, transparent 45%),
+        radial-gradient(ellipse at 50% 90%, rgba(200,176,232,0.35) 0%, transparent 55%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      color: var(--deep);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 20px 80px;
+    }
+
+    /* ── Photo ── */
+    .photo-wrap {
+      position: relative;
+      width: 148px;
+      height: 148px;
+      margin-bottom: 22px;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      background: conic-gradient(var(--blue), var(--purple-light), var(--purple), var(--blue));
+      animation: spin 8s linear infinite;
+      opacity: 0.75;
+    }
+
+    .photo-wrap img {
+      position: relative;
+      width: 148px;
+      height: 148px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top center;
+      border: 4px solid white;
+      display: block;
+    }
+
+    /* Placeholder shown when no photo is loaded */
+    .photo-placeholder {
+      position: relative;
+      width: 148px;
+      height: 148px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      border: 4px solid white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      color: white;
+      letter-spacing: -2px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Name ── */
+    .brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 8vw, 46px);
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      color: var(--deep);
+      animation: fadeUp 0.8s 0.1s ease both;
+      margin-bottom: 6px;
+    }
+
+    .brand-tagline {
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      animation: fadeUp 0.8s 0.2s ease both;
+      margin-bottom: 44px;
+    }
+
+    /* ── Links ── */
+    .links {
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .link-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 17px 24px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      text-decoration: none;
+      color: var(--deep);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      animation: fadeUp 0.7s ease both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .link-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.35) 50%, transparent 70%);
+      transform: translateX(-100%);
+      transition: transform 0.5s ease;
+    }
+
+    .link-btn:hover::before { transform: translateX(100%); }
+
+    .link-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(106,180,224,0.25);
+      background: rgba(255,255,255,0.62);
+    }
+
+    .link-btn.disabled {
+      opacity: 0.45;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .link-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .link-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 17px;
+    }
+
+    .link-label {
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .link-sub {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+      letter-spacing: 0.04em;
+    }
+
+    .arrow {
+      color: var(--blue-mid);
+      font-size: 18px;
+      opacity: 0.7;
+    }
+
+    /* Icon color themes */
+    .icon-vip   { background: linear-gradient(135deg, #6ab4e0, #4e9ecf); color: white; }
+    .icon-free  { background: linear-gradient(135deg, #a88bcc, #c8b0e8); color: white; }
+    .icon-reddit { background: linear-gradient(135deg, #e8744a, #f0956a); color: white; }
+    .icon-x     { background: #1a1a1a; color: white; }
+    .icon-shop  { background: linear-gradient(135deg, #7ab0cc, #a8cce0); color: white; }
+
+    /* stagger */
+    .links .link-btn:nth-child(1) { animation-delay: 0.25s; }
+    .links .link-btn:nth-child(2) { animation-delay: 0.35s; }
+    .links .link-btn:nth-child(3) { animation-delay: 0.45s; }
+    .links .link-btn:nth-child(4) { animation-delay: 0.55s; }
+    .links .link-btn:nth-child(5) { animation-delay: 0.65s; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 56px;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      animation: fadeUp 0.8s 0.8s ease both;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PHOTO: replace photo.jpg with your actual image filename -->
+  <div class="photo-wrap">
+    <img src="photo.jpg" alt="peekabooadams"
+         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+    <div class="photo-placeholder" style="display:none;">p</div>
+  </div>
+
+  <h1 class="brand-name">peekabooadams</h1>
+  <p class="brand-tagline">All my links &nbsp;·&nbsp; one place</p>
+
+  <nav class="links">
+
+    <a href="https://onlyfans.com/peekabooadams" target="_blank" rel="noopener" class="link-btn">
+      <div class="link-left">
+        <div class="link-icon icon-vip">★</div>
+        <div>
+          <div class="link-label">VIP Page</div>
+          <div class="link-sub">Exclusive content</div>
+        </div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a href="https://onlyfans.com/alexandrathemeh" target="_blank" rel="noopener" class="link-btn">
+      <div class="link-left">
+        <div class="link-icon icon-free">♡</div>
+        <div>
+          <div class="link-label">Free Page</div>
+          <div class="link-sub">Free content</div>
+        </div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a href="https://www.reddit.com/user/peekabooadams/" target="_blank" rel="noopener" class="link-btn">
+      <div class="link-left">
+        <div class="link-icon icon-reddit">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M20 10a10 10 0 1 1-20 0 10 10 0 0 1 20 0zm-8.4-3.2c.7 0 1.3-.6 1.3-1.3s-.6-1.3-1.3-1.3c-.5 0-1 .3-1.2.8l-2-.4c-.1 0-.2.1-.2.2l-.5 2.3A5.9 5.9 0 0 0 4 10c0 2.8 2.7 5 6 5s6-2.2 6-5c0-1.6-.9-3.1-2.3-4l-.5-2.3c0-.1-.1-.2-.2-.2l-2 .4c-.2-.5-.7-.8-1.2-.8-.7 0-1.3.6-1.3 1.3 0 .7.6 1.3 1.3 1.3zm-4 3.4a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm6.8 2.6c-.5.5-1.3.8-2.4.8s-1.9-.3-2.4-.8a.3.3 0 0 1 .4-.4c.4.4 1 .6 2 .6s1.6-.2 2-.6a.3.3 0 0 1 .4.4zm-.4-1.6a1 1 0 1 1 2 0 1 1 0 0 1-2 0z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="link-label">Reddit</div>
+          <div class="link-sub">u/peekabooadams</div>
+        </div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a href="https://x.com/peekabooadams" target="_blank" rel="noopener" class="link-btn">
+      <div class="link-left">
+        <div class="link-icon icon-x">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="link-label">X / Twitter</div>
+          <div class="link-sub">@peekabooadams</div>
+        </div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="link-btn disabled">
+      <div class="link-left">
+        <div class="link-icon icon-shop">🛍</div>
+        <div>
+          <div class="link-label">Used Items</div>
+          <div class="link-sub">Coming soon</div>
+        </div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+  </nav>
+
+  <footer>© 2025 peekabooadams</footer>
+
+</body>
+</html>
